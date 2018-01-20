@@ -1,0 +1,2 @@
+const int CALC_TO_PRINT = 1000000;
+const int PRINT_NUM = 50;
