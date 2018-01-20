@@ -24,6 +24,7 @@ model::model(const int mode) {
 	std::uniform_int_distribution<> dis(0, 32767);
 	blankref[0] = 0;
 	blankref[1] = 1;
+	unpushed_parts = 0;
 	double r = 0;
 	switch (mode)
 	{
@@ -32,7 +33,7 @@ model::model(const int mode) {
 		for (int i = 0; i < MODEL_SIZE_X; i++)
 			for (int j = 0; j < MODEL_SIZE_X; j++)
 				for (int k = 0; k < MODEL_SIZE_X; k++)
-					model3D[i][j][k] = dis(gen) >= 16384;
+					model3D[i][j][k] = 0;
 
 		break;
 	case 1:
@@ -81,6 +82,25 @@ model::model(const int mode) {
 	default:
 		break;
 	}
+}
+
+void model::push(double parts)
+{
+	unpushed_parts += parts;
+	const int pos_x = MODEL_SIZE_X/2-4;
+	const int pos_y = MODEL_SIZE_Y / 2 - 4;
+	const int pos_z = MODEL_SIZE_Z - 4;
+	const int siz_x = 8;
+	const int siz_y = 8;
+	const int siz_z = 4;
+
+	for (int i = pos_x; i < pos_x + siz_x; i++)
+		for (int j = pos_y; j < pos_y + siz_y; j++)
+			for (int k = pos_z; k < pos_z + siz_z; k++)
+				if (unpushed_parts >= 1) {
+					__int8& s = getdata(i, j, k);
+					if (!s) { s++; unpushed_parts--; }
+				}
 }
 
 __int8& model::getdata(int x, int y, int z) {

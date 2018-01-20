@@ -8,10 +8,10 @@ class model {
 	__int8 blankref[2];
 public:
 	
-	
+	double unpushed_parts;
 	
 	model(const int mode);
-	
+	void push(double parts);
 	__int8& getdata(int x, int y, int z);
 };
 //std::vector<model> modelMemory;

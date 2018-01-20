@@ -18,3 +18,5 @@ extern const int HIDE_RATIO;
 extern const int STEP_POT;
 extern const double EN_CONV;
 extern const int STEP_SLOPE;
+extern const int STEP_PUSH;
+extern const double FLOW_PER_STEP;

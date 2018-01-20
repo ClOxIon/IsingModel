@@ -98,6 +98,7 @@ void monteCarloSimulate(model& m) {
 			potInit = potFnl;
 			particleCnt = 0;
 		}
+		if (i%STEP_PUSH) { m.push(FLOW_PER_STEP*STEP_PUSH); }
 		
 		int count1 = 3-(b + bd + bu);
 		if (count1) {
